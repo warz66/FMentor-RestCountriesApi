@@ -35,9 +35,9 @@
       <div v-if="error" class="error">
         <p>{{error.message}}</p>
       </div>
-      <div id="countries-box" v-else>
+      <div id="countries-box" v-else-if="error === false">
         <template v-for="country in countries" :key="country">
-          <CountryBox v-show="((country.region === region || region === 'Filter by Region') && country.name.toLowerCase().includes(search.toLowerCase()))" :country="country" />
+          <CountryBox v-show="filter(country)" :country="country" />
         </template>
       </div>
     </section>
@@ -53,9 +53,9 @@ export default {
     return {
       openSelect: false,
       error: null,
-      countries: null,
+      countries: [],
       region: 'Filter by Region',
-      search: "",
+      search: ""
     }
   },
   components: {
@@ -68,9 +68,12 @@ export default {
   },
   methods: {
     onClickOutside() {
-        this.openSelect = false;
-      },
+      this.openSelect = false;
+    },
+    filter: function(country) {
+      return ((country.region === this.region || this.region === 'Filter by Region') && country.name.toLowerCase().includes(this.search.toLowerCase()));
     }
+  }
 }
 </script>
 
