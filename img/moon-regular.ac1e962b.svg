@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg width="22px" height="22px" viewbox="0 0 22 22" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+  <g id="moon-regular" transform="translate(0.625 0.625)">
+    <path d="M0 0L20 0L20 20L0 20L0 0Z" id="Rectangle" fill="none" fill-rule="evenodd" stroke="none" />
+    <path d="M11.0532 10.065C7.16857 10.065 4.01929 7.17783 4.01929 3.61821C4.01929 2.2753 4.46679 1.03158 5.23143 0C2.19036 0.945149 0 3.58122 0 6.68807C0 10.5885 3.44929 13.75 7.70357 13.75C11.0929 13.75 13.9696 11.7432 15 8.95452C13.875 9.65479 12.5161 10.065 11.0532 10.065Z" transform="translate(2.5 3.75)" id="Path" fill="#FFFFFF" fill-rule="evenodd" stroke="#111517" stroke-width="1.25" />
+  </g>
+</svg>
