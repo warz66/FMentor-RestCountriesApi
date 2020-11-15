@@ -6,7 +6,7 @@ work to do ->
 
 # Frontend Mentor - REST Countries API with color theme switcher
 
-![Design preview for the REST Countries API with color theme switcher coding challenge](./design/desktop-preview.jpg)
+![Design preview for the REST Countries API with color theme switcher coding challenge](./desktop-preview.jpg)
 
 ## Welcome! 👋
 
