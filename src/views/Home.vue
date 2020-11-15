@@ -7,7 +7,7 @@
     <section id="search-filter-panel">
       
       <div id="search-country-wrapper">
-        <input type="text" v-model="search" placeholder="Search for a country..."/>
+        <input type="text" v-model="search" aria-label="Allows you to search for a country" placeholder="Search for a country..."/>
       </div>
 
       <div id="select-region-wrapper" v-click-outside="onClickOutside">
