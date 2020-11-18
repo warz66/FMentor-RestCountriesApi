@@ -1,5 +1,5 @@
 <template>
-  <div class="country-box" :to="{ name: 'Country', params: { alpha3Code: country.alpha3Code } }">
+  <router-link class="country-box" :to="{ name: 'Country', params: { alpha3Code: country.alpha3Code } }">
     <img :src="country.flag" :alt="country.name+' flag'">
     <div class="country-box-info">
         <h2>{{country.name}}</h2>
@@ -7,7 +7,7 @@
         <p><span class="semi-bold">Region: </span>{{country.region}}</p>
         <p><span class="semi-bold">Capital: </span>{{country.capital}}</p>
     </div>
-  </div>
+  </router-link>
 </template>
 
 <script>
