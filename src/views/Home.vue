@@ -4,7 +4,7 @@
   <!--<img src="../assets/images/design/desktop-design-home-light.jpg" alt="" style="position:absolute; left:0; top:0; z-index: 2; opacity:0.3;  margin: 0; width: 1440px;">-->
   <!--<img src="../assets/images/design/mobile-index-dark.jpeg" alt="" style="position:absolute; left:0; top:0; z-index: 2; opacity:0.3;  margin: 0; width: 375px;">-->
     
-    <section id="search-filter-panel">
+    <div id="search-filter-panel">
       
       <div id="search-country-wrapper">
         <input type="text" v-model="search" aria-label="Allows you to search for a country" placeholder="Search for a country..."/>
@@ -29,7 +29,7 @@
         </transition> 
       </div>
 
-    </section>
+    </div>
 
     <section id="countries">
       <div v-if="error" class="error">
@@ -79,7 +79,7 @@ export default {
 
 <style scoped>
 
-/* section search filter panel */
+/* search filter panel */
 
 #search-filter-panel {
   margin: 0 auto;

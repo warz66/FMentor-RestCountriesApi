@@ -3,7 +3,7 @@
         <div>
             <h1>Where in the world?</h1>
             <div @click="$store.state.mode = !$store.state.mode" id="select-mode">
-                <img alt="image moon mode">
+                <img src="../assets/images/moon-regular.svg" alt="image moon mode">
                 {{$store.state.mode ? 'Dark Mode' : 'Light Mode'}}
             </div>
         </div>
