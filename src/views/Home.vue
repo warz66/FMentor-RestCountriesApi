@@ -48,7 +48,6 @@
 import CountryBox from '@/components/CountryBox.vue'
 
 export default {
-  name: 'Home',
   data: function() {
     return {
       openSelect: false,
@@ -59,7 +58,7 @@ export default {
     }
   },
   components: {
-    CountryBox
+    CountryBox,
   },
   mounted() {
     this.axios.get('https://restcountries.eu/rest/v2/all')
