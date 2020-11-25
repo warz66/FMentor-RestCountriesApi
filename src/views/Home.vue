@@ -35,7 +35,10 @@
       <div v-if="error" class="error">
         <p>{{error.message}}</p>
       </div>
-      <div id="countries-box" v-else-if="error === false">
+      <div class="loading" v-else-if="!isLoadedCountries" >
+        Loading...
+      </div>
+      <div id="countries-box" v-else>
         <template v-for="country in countries" :key="country">
           <CountryBox v-show="filter(country)" :country="country" />
         </template>
@@ -51,7 +54,8 @@ export default {
   data: function() {
     return {
       openSelect: false,
-      error: null,
+      error: false,
+      isLoadedCountries: false,
       countries: [],
       region: 'Filter by Region',
       search: ""
@@ -61,9 +65,10 @@ export default {
     CountryBox,
   },
   mounted() {
-    this.axios.get('https://restcountries.eu/rest/v2/all')
+    this.consumeAPI();
+    /*this.axios.get('https://restcountries.eu/rest/v2/all')
               .then((response) => {(this.countries = response.data); this.error = false})
-              .catch(error => this.error = error)
+              .catch(error => this.error = error)*/
   },
   methods: {
     onClickOutside() {
@@ -71,6 +76,11 @@ export default {
     },
     filter: function(country) {
       return ((country.region === this.region || this.region === 'Filter by Region') && country.name.toLowerCase().includes(this.search.toLowerCase()));
+    },
+    consumeAPI: function() {
+        this.axios.get('https://restcountries.eu/rest/v2/all')
+        .then((response) => {this.countries = response.data; this.isLoadedCountries= true;})
+        .catch(error => {this.error = error} )
     }
   }
 }

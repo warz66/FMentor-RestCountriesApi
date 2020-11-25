@@ -12,6 +12,9 @@
         <div v-if="error" class="error">
             <p>{{error.message}}</p>
         </div>
+        <div class="loading" v-else-if="!isLoadedCountry">
+            Loading...
+        </div>
         <div id="country" v-else>
             <div id="country-img">
                 <img :src="country.flag" :alt="country.name+' flag'">
@@ -34,7 +37,8 @@
                 </div>
                 <div id="countries-border">
                     <p><span class="semi-bold">Border Countries: </span></p>
-                    <template v-if="countriesBorder.length">
+                    <p v-if="!isLoadedCountriesBorder">Loading...</p>
+                    <template v-else-if="countriesBorder.length">
                         <router-link class="button-border-country" v-for="country in countriesBorder" :key="country" :to="{ name: 'Country', params: { alpha3Code: country.a3c } }">
                             {{country.name}}
                         </router-link>
@@ -55,7 +59,9 @@ export default {
     data: function() {
         return {
         country: null,
-        error: String,
+        isLoadedCountry: false,
+        isLoadedCountriesBorder: false,
+        error: false,
         countriesBorder: []
         }
     },
@@ -66,7 +72,7 @@ export default {
         this.consumeAPI(this.alpha3Code);
     },
     watch: {
-        country: function() {
+        /*country: function() {
             this.countriesBorder=[];
             if (this.error === false) {
                 this.country.borders.forEach((countryBorderA3C, index) => 
@@ -74,6 +80,13 @@ export default {
                 .then((response) => {this.countriesBorder.splice(index, 0, {"name": response.data.name, "a3c": countryBorderA3C, "error": false})})
                 .catch(error => this.countriesBorder.splice(index, 0, {"name": countryBorderA3C, "a3c": countryBorderA3C, "error": error.message})))
             }
+        },*/
+        country: async function() {
+            this.countriesBorder = await Promise.all(this.country.borders.map(async function(countryBorderA3C) {
+                return await fetch(`https://restcountries.eu/rest/v2/alpha/${countryBorderA3C}?fields=name`).then(res => res.json())
+                    .then(result => { return {"name": result.name, "a3c": countryBorderA3C} }).catch(() => { return {"name": countryBorderA3C, "a3c": countryBorderA3C}});
+            }));
+            this.isLoadedCountriesBorder = true;
         },
         $route(from) {
             if(from.name === 'Country') {
@@ -87,8 +100,8 @@ export default {
         },
         consumeAPI: function(a3c) {
             this.axios.get('https://restcountries.eu/rest/v2/alpha/'+a3c)
-            .then((response) => {(this.country = response.data); this.error = false;})
-            .catch(error => {this.error = error} )
+                .then((response) => {(this.country = response.data); this.isLoadedCountry = true;})
+                .catch(error => {this.error = error} )
         }
     },
 }
@@ -103,7 +116,7 @@ export default {
 #country {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    /*align-items: center;*/
     margin-top: 80px;
     max-width: 1280px;
 }

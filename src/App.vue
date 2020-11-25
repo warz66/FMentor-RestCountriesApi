@@ -67,4 +67,10 @@ export default {
   font-weight: bold;
   font-size: 18px;
 }
+.loading {
+  margin-top: 50px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 18px;
+}
 </style>
