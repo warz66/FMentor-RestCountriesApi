@@ -31,14 +31,14 @@
 
     </div>
 
-    <section id="countries">
-      <div v-if="error" class="error">
-        <p>{{error.message}}</p>
-      </div>
-      <div class="loading" v-else-if="!isLoadedCountries" >
-        Loading...
-      </div>
-      <div id="countries-box" v-else>
+    <div v-if="error" class="error">
+      <p>{{error.message}}</p>
+    </div>
+    <div class="loading" v-else-if="!isLoadedCountries" >
+      Loading...
+    </div>
+    <section id="countries" v-else>
+      <div id="countries-box">
         <template v-for="country in countries" :key="country">
           <CountryBox v-show="filter(country)" :country="country" />
         </template>
@@ -66,9 +66,6 @@ export default {
   },
   mounted() {
     this.consumeAPI();
-    /*this.axios.get('https://restcountries.eu/rest/v2/all')
-              .then((response) => {(this.countries = response.data); this.error = false})
-              .catch(error => this.error = error)*/
   },
   methods: {
     onClickOutside() {

@@ -71,16 +71,17 @@ export default {
     mounted() {
         this.consumeAPI(this.alpha3Code);
     },
+    methods: {
+        sortArray: function(array,idxStr) {
+            return array.map(array => array[idxStr]).join(', ');
+        },
+        consumeAPI: function(a3c) {
+            this.axios.get('https://restcountries.eu/rest/v2/alpha/'+a3c)
+                .then((response) => {(this.country = response.data); this.isLoadedCountry = true;})
+                .catch(error => {this.error = error} )
+        }
+    },
     watch: {
-        /*country: function() {
-            this.countriesBorder=[];
-            if (this.error === false) {
-                this.country.borders.forEach((countryBorderA3C, index) => 
-                this.axios.get(`https://restcountries.eu/rest/v2/alpha/${countryBorderA3C}?fields=name`)
-                .then((response) => {this.countriesBorder.splice(index, 0, {"name": response.data.name, "a3c": countryBorderA3C, "error": false})})
-                .catch(error => this.countriesBorder.splice(index, 0, {"name": countryBorderA3C, "a3c": countryBorderA3C, "error": error.message})))
-            }
-        },*/
         country: async function() {
             this.countriesBorder = await Promise.all(this.country.borders.map(async function(countryBorderA3C) {
                 return await fetch(`https://restcountries.eu/rest/v2/alpha/${countryBorderA3C}?fields=name`).then(res => res.json())
@@ -93,17 +94,7 @@ export default {
                 this.consumeAPI(from.params.alpha3Code);
             }
         }
-    },
-    methods: {
-        sortArray: function(array,idxStr) {
-            return array.map(array => array[idxStr]).join(', ');
-        },
-        consumeAPI: function(a3c) {
-            this.axios.get('https://restcountries.eu/rest/v2/alpha/'+a3c)
-                .then((response) => {(this.country = response.data); this.isLoadedCountry = true;})
-                .catch(error => {this.error = error} )
-        }
-    },
+    }
 }
 </script>
 
