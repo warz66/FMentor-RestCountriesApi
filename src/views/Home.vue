@@ -75,7 +75,7 @@ export default {
       return ((country.region === this.region || this.region === 'Filter by Region') && country.name.toLowerCase().includes(this.search.toLowerCase()));
     },
     consumeAPI: function() {
-        this.axios.get('https://restcountries.eu/rest/v2/all')
+        this.axios.get('https://restcountries.com/v2/all')
         .then((response) => {this.countries = response.data; this.isLoadedCountries= true;})
         .catch(error => {this.error = error} )
     }
